@@ -1,0 +1,195 @@
+/* ============================================
+   LEGAL – Impressum, Datenschutz, 404
+   ============================================ */
+
+.legal {
+  padding: 12rem var(--gutter) 6rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.legal .back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  transition:
+    color 0.3s,
+    gap 0.3s var(--ease);
+}
+.legal .back:hover {
+  color: var(--ink);
+  gap: 0.9rem;
+}
+
+.legal header {
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+}
+.legal header .eyebrow {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.legal h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.legal h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.legal header p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.legal section {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.legal section:last-child {
+  border-bottom: 0;
+}
+
+.legal h2 {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  margin-bottom: 1.8rem;
+  line-height: 1.2;
+}
+.legal h3 {
+  font-size: 1.1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 2rem 0 0.8rem;
+}
+
+.legal p {
+  color: var(--ink-2);
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  max-width: 68ch;
+}
+.legal a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.legal a:hover {
+  border-color: var(--accent);
+}
+
+.legal dl {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0.8rem 2rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1.8rem;
+  background: var(--paper-2);
+  border-radius: var(--radius);
+}
+.legal dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.legal dd {
+  color: var(--ink);
+}
+
+.legal ul.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+}
+.legal ul.bullets li {
+  padding: 0.6rem 0 0.6rem 1.8rem;
+  position: relative;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 68ch;
+}
+.legal ul.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: 0.6rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.legal .toc {
+  padding: 2rem;
+  background: var(--paper-2);
+  border-radius: var(--radius);
+  margin-bottom: 4rem;
+}
+.legal .toc h4 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+.legal .toc ol {
+  list-style: none;
+  counter-reset: toc;
+  padding: 0;
+  columns: 2;
+  column-gap: 2rem;
+}
+.legal .toc ol li {
+  counter-increment: toc;
+  padding: 0.4rem 0;
+  break-inside: avoid;
+}
+.legal .toc ol li::before {
+  content: counter(toc, decimal-leading-zero) " ";
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-right: 0.6rem;
+}
+.legal .toc a {
+  color: var(--ink);
+  border: 0;
+}
+.legal .toc a:hover {
+  color: var(--accent);
+}
+
+.legal section[id] {
+  scroll-margin-top: 6rem;
+}
+
+@media (max-width: 700px) {
+  .legal {
+    padding: 9rem 1.3rem 4rem;
+  }
+  .legal dl {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+    padding: 1.2rem;
+  }
+  .legal dl dd {
+    margin-bottom: 1rem;
+  }
+  .legal .toc ol {
+    columns: 1;
+  }
+}
