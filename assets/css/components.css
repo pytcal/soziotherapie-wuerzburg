@@ -7,7 +7,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  padding: 1.1rem 1.8rem;
+  padding: 1rem 1.6rem;
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   letter-spacing: 0.15em;
@@ -15,16 +15,16 @@
   border-radius: 999px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s var(--ease);
+  transition: background 0.3s, color 0.3s, transform 0.3s var(--ease);
   will-change: transform;
+  min-height: 48px; /* Touch-freundlich */
+  white-space: nowrap;
 }
 .btn-primary {
   background: var(--ink);
   color: var(--paper);
 }
-.btn-primary:hover {
-  background: var(--accent);
-}
+.btn-primary:hover { background: var(--accent); }
 .btn-outline {
   border: 1px solid var(--ink);
   color: var(--ink);
@@ -36,18 +36,14 @@
 .btn .arrow {
   width: 14px;
   height: 14px;
+  flex-shrink: 0;
   transition: transform 0.4s var(--ease-out);
 }
-.btn:hover .arrow {
-  transform: translateX(4px);
-}
+.btn:hover .arrow { transform: translateX(4px); }
 
-/* Magnetic hover data-hook */
-.magnetic {
-  display: inline-block;
-}
+.magnetic { display: inline-block; }
 
-/* ===== Image placeholder ===== */
+/* ===== Media ===== */
 .media {
   position: relative;
   overflow: hidden;
@@ -77,18 +73,10 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
-.media.is-4x5::before {
-  padding-top: 125%;
-}
-.media.is-3x4::before {
-  padding-top: 133%;
-}
-.media.is-1x1::before {
-  padding-top: 100%;
-}
-.media.is-16x9::before {
-  padding-top: 56.25%;
-}
+.media.is-4x5::before { padding-top: 125%; }
+.media.is-3x4::before { padding-top: 133%; }
+.media.is-1x1::before { padding-top: 100%; }
+.media.is-16x9::before { padding-top: 56.25%; }
 
 .media img,
 .media .ph {
@@ -115,6 +103,7 @@
   height: 6px;
   border-radius: 999px;
   background: var(--accent);
+  flex-shrink: 0;
 }
 
 /* ===== Divider ===== */
@@ -129,7 +118,7 @@ hr.rule {
 .marquee {
   overflow: hidden;
   border-block: 1px solid var(--line);
-  padding: 1.6rem 0;
+  padding: clamp(1rem, 3vw, 1.6rem) 0;
   background: var(--paper);
 }
 .marquee-track {
@@ -139,7 +128,7 @@ hr.rule {
   animation: marquee 40s linear infinite;
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(1.4rem, 5vw, 4rem);
   color: var(--ink);
 }
 .marquee-track span {
@@ -155,9 +144,12 @@ hr.rule {
   transform: translateY(-0.3em);
 }
 @keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
+  to { transform: translateX(-50%); }
+}
+
+/* Pause on reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }
 
 /* ===== Forms ===== */
@@ -175,9 +167,7 @@ hr.rule {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  transition:
-    transform 0.3s var(--ease),
-    color 0.3s;
+  transition: transform 0.3s var(--ease), color 0.3s;
   pointer-events: none;
 }
 .field input,
@@ -186,15 +176,17 @@ hr.rule {
   background: none;
   border: 0;
   padding: 0.2rem 0;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  /* Verhindert iOS-Zoom bei focus */
+  font-size: max(1rem, 16px);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 .field input:focus,
-.field textarea:focus {
-  outline: none;
-}
-.field:focus-within {
-  border-color: var(--ink);
-}
+.field textarea:focus { outline: none; }
+.field:focus-within { border-color: var(--ink); }
 .field:focus-within label,
 .field.filled label {
   transform: translateY(-1.4rem) scale(0.85);
@@ -202,3 +194,24 @@ hr.rule {
   transform-origin: left;
 }
 
+/* ===== Cursor ===== */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor.hover {
+  width: 44px; height: 44px;
+  background: #fff;
+}
+/* Auf Touch-Geräten ausblenden */
+@media (pointer: coarse) {
+  .cursor { display: none; }
+}
